@@ -29,12 +29,13 @@ outliers_summary={}
 for feature in numerical_features.columns:
     Q1=housing_df[feature].quantile(0.25)
     Q3=housing_df[feature].quantile(0.75)
-    IQR=Q3.Q1
+    IQR=Q3-Q1
     lower_bound=Q1-1.5*IQR
     upper_bound=Q3+1.5*IQR
-    outliers=housing_df(housing_df[feature]<lower_bound)|(housing_df[feature]>upper_bound)
+    outliers=housing_df[(housing_df[feature]<lower_bound)|(housing_df[feature]>upper_bound)]
     outliers_summary[feature]=len(outliers)
     print(outliers_summary)
     print(housing_df.describe())
+
 
 
